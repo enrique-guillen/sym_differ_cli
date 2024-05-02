@@ -1,0 +1,361 @@
+require:
+- rubocop-rspec
+- rubocop-performance
+
+# Disable verified doubles as we want units and their corresponding tests to be fully self-contained, as opposed to
+# referencing a concrete implementation class outside of the unit and test.
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+# It's not uncommon for a unit test with a handful of stubbed dependencies to have at least 6 helpers in one example
+# group (one for the dependency and one for the response, minimum). By making each helper a simple double, and keeping
+# the amount of setup in a single example group to a minimum, it's possible to work with the max number of helpers
+# configured below. If your number of helpers exceed this value, consider refactoring the unit you're testing.
+RSpec/MultipleMemoizedHelpers:
+  Max: 11
+
+# We interpret Arrange-Act-Assert a little bit differently. Empirically speaking there's no readibility nor
+# maintainability issues with tests that consist of a handful of arrange statements, followed by one act statement,
+# followed by a handful of assert statements. We don't enforce one style or the other, other than for observing that (1)
+# Arranging is mainly done in context hooks, (2) Acting is only done once for an `it` block, followed by (3) one or more
+# Assert statements. The max value here is meant to encourage the creation of units (e.g., classes) that don't require a
+# high combination of arrangements, acts, and assertions, which we identify as an actual problem.
+RSpec/MultipleExpectations:
+  Max: 6
+
+# Refer to the previous comment for an explanation of the value of this setting.
+RSpec/ExampleLength:
+  Max: 12
+
+# Accounting for the root RSpec.describe call, and the describe "#method_name" call, the default of 3 nested groups
+# only allows for one nested context; it should be possible to nest a little bit deeper than that depending on
+# circumstances.
+RSpec/NestedGroups:
+  Max: 5
+
+# The compact style of the `raise` call discourages exception messages (but still allows them), and encourages
+# descriptive exception names.
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+# We want to enable snake_case to give some space to breathe between all words of an identifier (as a general rule), and
+# I think snake_case makes it easier to mentally parse indexed variables at a glance.
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+# This cop exists presumably (at the time of writing this) because different numbers tend to be used in lieu of
+# meaningful names, but numbers can be shorthands for meaningful information (e.g., ordering of items in an array). We
+# should be fine to disable this cop as long as we don't introduce multiple Indexed Lets.
+RSpec/IndexedLet:
+  Enabled: false
+
+# Cops not enabled by default are all enabled here.
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: true
+Gemspec/DevelopmentDependencies:
+  Enabled: true
+Gemspec/RequireMFA:
+  Enabled: true
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+Layout/LineContinuationSpacing:
+  Enabled: true
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: true
+Layout/SpaceBeforeBrackets:
+  Enabled: true
+Lint/AmbiguousAssignment:
+  Enabled: true
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: true
+Lint/AmbiguousRange:
+  Enabled: true
+Lint/ConstantOverwrittenInRescue:
+  Enabled: true
+Lint/DeprecatedConstants:
+  Enabled: true
+Lint/DuplicateBranch:
+  Enabled: true
+Lint/DuplicateMagicComment:
+  Enabled: true
+Lint/DuplicateMatchPattern:
+  Enabled: true
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+Lint/EmptyBlock:
+  Enabled: true
+Lint/EmptyClass:
+  Enabled: true
+Lint/EmptyInPattern:
+  Enabled: true
+Lint/IncompatibleIoSelectWithFiberScheduler:
+  Enabled: true
+Lint/ItWithoutArgumentsInBlock:
+  Enabled: true
+Lint/LambdaWithoutLiteralBlock:
+  Enabled: true
+Lint/LiteralAssignmentInCondition:
+  Enabled: true
+Lint/MixedCaseRange:
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+Lint/NonAtomicFileOperation:
+  Enabled: true
+Lint/NumberedParameterAssignment:
+  Enabled: true
+Lint/OrAssignmentToConstant:
+  Enabled: true
+Lint/RedundantDirGlobSort:
+  Enabled: true
+Lint/RedundantRegexpQuantifiers:
+  Enabled: true
+Lint/RefinementImportMethods:
+  Enabled: true
+Lint/RequireRangeParentheses:
+  Enabled: true
+Lint/RequireRelativeSelfPath:
+  Enabled: true
+Lint/SymbolConversion:
+  Enabled: true
+Lint/ToEnumArguments:
+  Enabled: true
+Lint/TripleQuotes:
+  Enabled: true
+Lint/UnexpectedBlockArity:
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: true
+Lint/UselessRescue:
+  Enabled: true
+Lint/UselessRuby2Keywords:
+  Enabled: true
+Metrics/CollectionLiteralLength:
+  Enabled: true
+Naming/BlockForwarding:
+  Enabled: true
+Security/CompoundHash:
+  Enabled: true
+Security/IoMethods:
+  Enabled: true
+Style/ArgumentsForwarding:
+  Enabled: true
+Style/ArrayIntersect:
+  Enabled: true
+Style/CollectionCompact:
+  Enabled: true
+Style/ComparableClamp:
+  Enabled: true
+Style/ConcatArrayLiterals:
+  Enabled: true
+Style/DataInheritance:
+  Enabled: true
+Style/DirEmpty:
+  Enabled: true
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
+Style/EmptyHeredoc:
+  Enabled: true
+Style/EndlessMethod:
+  Enabled: true
+Style/EnvHome:
+  Enabled: true
+Style/ExactRegexpMatch:
+  Enabled: true
+Style/FetchEnvVar:
+  Enabled: true
+Style/FileEmpty:
+  Enabled: true
+Style/FileRead:
+  Enabled: true
+Style/FileWrite:
+  Enabled: true
+Style/HashConversion:
+  Enabled: true
+Style/HashExcept:
+  Enabled: true
+Style/IfWithBooleanLiteralBranches:
+  Enabled: true
+Style/InPatternThen:
+  Enabled: true
+Style/MagicCommentFormat:
+  Enabled: true
+Style/MapCompactWithConditionalBlock:
+  Enabled: true
+Style/MapToHash:
+  Enabled: true
+Style/MapToSet:
+  Enabled: true
+Style/MinMaxComparison:
+  Enabled: true
+Style/MultilineInPatternThen:
+  Enabled: true
+Style/NegatedIfElseCondition:
+  Enabled: true
+Style/NestedFileDirname:
+  Enabled: true
+Style/NilLambda:
+  Enabled: true
+Style/NumberedParameters:
+  Enabled: true
+Style/NumberedParametersLimit:
+  Enabled: true
+Style/ObjectThen:
+  Enabled: true
+Style/OpenStructUse:
+  Enabled: true
+Style/OperatorMethodCall:
+  Enabled: true
+Style/QuotedSymbols:
+  Enabled: true
+Style/RedundantArgument:
+  Enabled: true
+Style/RedundantArrayConstructor:
+  Enabled: true
+Style/RedundantConstantBase:
+  Enabled: true
+Style/RedundantCurrentDirectoryInPath:
+  Enabled: true
+Style/RedundantDoubleSplatHashBraces:
+  Enabled: true
+Style/RedundantEach:
+  Enabled: true
+Style/RedundantFilterChain:
+  Enabled: true
+Style/RedundantHeredocDelimiterQuotes:
+  Enabled: true
+Style/RedundantInitialize:
+  Enabled: true
+Style/RedundantLineContinuation:
+  Enabled: true
+Style/RedundantRegexpArgument:
+  Enabled: true
+Style/RedundantRegexpConstructor:
+  Enabled: true
+Style/RedundantSelfAssignmentBranch:
+  Enabled: true
+Style/RedundantStringEscape:
+  Enabled: true
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: true
+Style/SelectByRegexp:
+  Enabled: true
+Style/SingleLineDoEndBlock:
+  Enabled: true
+Style/StringChars:
+  Enabled: true
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+Style/SuperWithArgsParentheses:
+  Enabled: true
+Style/SwapValues:
+  Enabled: true
+Style/YAMLFileRead:
+  Enabled: true
+Capybara/ClickLinkOrButtonStyle:
+  Enabled: true
+Capybara/MatchStyle:
+  Enabled: true
+Capybara/NegationMatcher:
+  Enabled: true
+Capybara/RedundantWithinFind:
+  Enabled: true
+Capybara/SpecificActions:
+  Enabled: true
+Capybara/SpecificFinders:
+  Enabled: true
+Capybara/SpecificMatcher:
+  Enabled: true
+Capybara/RSpec/HaveSelector:
+  Enabled: true
+Capybara/RSpec/PredicateMatcher:
+  Enabled: true
+FactoryBot/AssociationStyle:
+  Enabled: true
+FactoryBot/ConsistentParenthesesStyle:
+  Enabled: true
+FactoryBot/ExcessiveCreateList:
+  Enabled: true
+FactoryBot/FactoryAssociationWithStrategy:
+  Enabled: true
+FactoryBot/FactoryNameStyle:
+  Enabled: true
+FactoryBot/IdSequence:
+  Enabled: true
+FactoryBot/RedundantFactoryOption:
+  Enabled: true
+FactoryBot/SyntaxMethods:
+  Enabled: true
+RSpec/BeEmpty:
+  Enabled: true
+RSpec/BeEq:
+  Enabled: true
+RSpec/BeNil:
+  Enabled: true
+RSpec/ChangeByZero:
+  Enabled: true
+RSpec/ContainExactly:
+  Enabled: true
+RSpec/DuplicatedMetadata:
+  Enabled: true
+RSpec/ExcessiveDocstringSpacing:
+  Enabled: true
+RSpec/IdenticalEqualityAssertion:
+  Enabled: true
+RSpec/MatchArray:
+  Enabled: true
+RSpec/NoExpectationExample:
+  Enabled: true
+RSpec/PendingWithoutReason:
+  Enabled: true
+RSpec/RedundantAround:
+  Enabled: true
+RSpec/SkipBlockInsideExample:
+  Enabled: true
+RSpec/SortMetadata:
+  Enabled: true
+RSpec/SubjectDeclaration:
+  Enabled: true
+RSpec/VerifiedDoubleReference:
+  Enabled: true
+RSpec/Rails:
+  Enabled: false
+Performance/AncestorsInclude:
+  Enabled: true
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+Performance/BlockGivenWithExplicitBlock:
+  Enabled: true
+Performance/CollectionLiteralInLoop:
+  Enabled: true
+Performance/ConcurrentMonotonicTime:
+  Enabled: true
+Performance/ConstantRegexp:
+  Enabled: true
+Performance/MapCompact:
+  Enabled: true
+Performance/MapMethodChain:
+  Enabled: true
+Performance/MethodObjectAsBlock:
+  Enabled: true
+Performance/RedundantEqualityComparisonBlock:
+  Enabled: true
+Performance/RedundantSortBlock:
+  Enabled: true
+Performance/RedundantSplitRegexpArgument:
+  Enabled: true
+Performance/RedundantStringChars:
+  Enabled: true
+Performance/ReverseFirst:
+  Enabled: true
+Performance/SortReverse:
+  Enabled: true
+Performance/Squeeze:
+  Enabled: true
+Performance/StringIdentifierArgument:
+  Enabled: true
+Performance/StringInclude:
+  Enabled: true
+Performance/Sum:
+  Enabled: true
