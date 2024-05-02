@@ -1,5 +1,20 @@
 #!/usr/bin/env ruby
-
 # frozen_string_literal: true
 
-puts "PENDING"
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require "sym_differ_cli/help_controller"
+require "sym_differ_cli/derivative_expressions_controller"
+
+subcommand, *parameters = ARGV
+parameters = parameters.join
+
+result =
+  case subcommand
+  when "derive"
+    SymDifferCli::DerivativeExpressionsController.new.get_derivative_expression(parameters)
+  else
+    SymDifferCli::HelpController.new.display_help
+  end
+
+puts result.message
