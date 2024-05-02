@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["The SymDiffer CLI contributors."]
 
   spec.files = ["lib/sym_differ_cli.rb"]
+  spec.bindir = "exe"
   spec.required_ruby_version = "~> 3.3.0"
 
   spec.metadata = { "rubygems_mfa_required" => "true" }
