@@ -2,3 +2,4 @@ tags
 .rspec
 coverage/
 .bundle/
+report.cucumber.html
