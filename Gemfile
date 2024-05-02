@@ -2,6 +2,8 @@
 
 source "https://rubygems.org"
 
+gem "sym_differ", git: "https://github.com/enrique-guillen/sym_differ", branch: "main", require: false
+
 group :development do
   gem "cucumber", "~> 9.2.0", require: false
   gem "rspec", "~> 3.13.0", require: false

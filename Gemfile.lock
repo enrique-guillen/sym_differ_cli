@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/enrique-guillen/sym_differ
+  revision: 401f3f75bafc029aa32de78adce932601882c0f8
+  branch: main
+  specs:
+    sym_differ (1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -103,6 +110,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.20.2)
   rubocop-rspec (~> 2.22.0)
   simplecov
+  sym_differ!
 
 BUNDLED WITH
    2.5.7
