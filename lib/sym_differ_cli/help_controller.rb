@@ -3,6 +3,7 @@
 module SymDifferCli
   # Displays help related to the SymDifferCli utility.
   class HelpController
+    # Defines the high-level response of this use case.
     Response = Struct.new(:message)
 
     def display_help
