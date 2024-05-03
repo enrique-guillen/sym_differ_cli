@@ -7,7 +7,9 @@ require "sym_differ_cli/ansi_terminal_text_colorizer"
 module SymDifferCli
   # Computes derivative expressions from the provided expressions.
   class DerivativeExpressionsController
+    # Defines the high-level response of this use case.
     Response = Struct.new(:message)
+
     def get_derivative_expression(parameter)
       input = parameter.split(",", 2).map(&:strip)
       expression = input[0].to_s
