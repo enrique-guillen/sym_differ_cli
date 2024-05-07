@@ -6,13 +6,20 @@ $LOAD_PATH.unshift("#{__dir__}/../lib")
 require "sym_differ_cli/help_controller"
 require "sym_differ_cli/derivative_expressions_controller"
 
-subcommand, *parameters = ARGV
-parameters = parameters.join
+subcommand, *parameters_and_options = ARGV
+options, parameters = parameters_and_options.partition { |o| o.start_with?("--") }.map(&:join)
 
 result =
   case subcommand
   when "derive"
-    SymDifferCli::DerivativeExpressionsController.new.get_derivative_expression(parameters)
+    controller = SymDifferCli::DerivativeExpressionsController.new
+
+    case options
+    when "--help"
+      controller.display_help
+    else
+      controller.get_derivative_expression(parameters)
+    end
   else
     SymDifferCli::HelpController.new.display_help
   end

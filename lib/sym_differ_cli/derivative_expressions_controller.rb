@@ -23,6 +23,10 @@ module SymDifferCli
       render_error_view(e)
     end
 
+    def display_help
+      render_view(help_message)
+    end
+
     private
 
     def calculate_derivative(expression, variable)
@@ -47,6 +51,20 @@ module SymDifferCli
 
     def ansi_terminal_text_colorizer
       AnsiTerminalTextColorizer.new
+    end
+
+    def help_message
+      <<~MESSAGE
+        Usage: sym_differ_cli derive [options] [expression],[variable]
+        Prints the derivative expression of the input expression with respect to
+        the specified variable.
+
+        Examples:
+
+          sym_differ_cli derive x + x, x
+          sym_differ_cli derive "sine(x), x"
+          sym_differ_cli derive "cosine(x), x"
+      MESSAGE
     end
   end
 end

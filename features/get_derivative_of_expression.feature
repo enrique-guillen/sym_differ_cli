@@ -1,6 +1,26 @@
 Feature: sym_differ_cli get derivative of expression.
   Users can pass in an expression to derive. The input will be a string and a string will be outputted.
 
+  Rule: When calling the command with the help options, the help for the subcommand is displayed.
+    Scenario: The command is called with subcommand derive, options --help
+      Given the user passes in the subcommands: derive
+      And I pass in the options --help
+
+      When the user runs sym_differ_cli
+
+      Then the output should contain:
+      """
+      Usage: sym_differ_cli derive [options] [expression],[variable]
+      Prints the derivative expression of the input expression with respect to
+      the specified variable.
+
+      Examples:
+
+        sym_differ_cli derive x + x, x
+        sym_differ_cli derive "sine(x), x"
+        sym_differ_cli derive "cosine(x), x"
+      """
+
   Rule: When calling the command with subcommand and an expression parameter.
 
     Scenario: The command is called with subcommand derive, parameter 1, x.

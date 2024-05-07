@@ -21,7 +21,7 @@ When("the user passes in the expression: {}") do |expression|
 end
 
 When("the user runs sym_differ_cli") do
-  @payload = execute_sym_differ_cli_command(@subcommands, [@expression])
+  @payload = execute_sym_differ_cli_command(@subcommands, [*@options, @expression])
 end
 
 Then("the returned message should be: {}") do |text|
