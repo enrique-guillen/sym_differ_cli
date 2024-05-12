@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "sym_differ/get_derivative_of_expression_director"
+require "sym_differ/get_derivative_of_expression_interactor"
 require "sym_differ_cli/derivative_expression_exception_view_renderer"
 require "sym_differ_cli/ansi_terminal_text_colorizer"
 
@@ -30,7 +30,7 @@ module SymDifferCli
     private
 
     def calculate_derivative(expression, variable)
-      SymDiffer::GetDerivativeOfExpressionDirector
+      SymDiffer::GetDerivativeOfExpressionInteractor
         .new
         .calculate_derivative(expression, variable)
         .derivative_expression
