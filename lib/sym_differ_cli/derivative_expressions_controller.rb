@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "sym_differ/get_derivative_of_expression_interactor"
+require "sym_differ/error"
+
 require "sym_differ_cli/derivative_expression_exception_view_renderer"
 require "sym_differ_cli/ansi_terminal_text_colorizer"
 
@@ -18,8 +20,7 @@ module SymDifferCli
       derivative_expression = calculate_derivative(expression, variable)
 
       render_view(derivative_expression)
-    rescue SymDiffer::InvalidVariableGivenToExpressionParserError,
-           SymDiffer::UnparseableExpressionTextError => e
+    rescue SymDiffer::Error => e
       render_error_view(e)
     end
 

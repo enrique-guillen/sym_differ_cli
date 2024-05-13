@@ -3,8 +3,7 @@
 require "spec_helper"
 require "sym_differ_cli/derivative_expression_exception_view_renderer"
 
-require "sym_differ/invalid_variable_given_to_expression_parser_error"
-require "sym_differ/unparseable_expression_text_error"
+require "sym_differ/expression_text_language_compiler/invalid_variable_given_to_expression_parser_error"
 require "sym_differ/expression_text_language_compiler/empty_expression_text_error"
 require "sym_differ/expression_text_language_compiler/unrecognized_token_error"
 require "sym_differ/expression_text_language_compiler/invalid_syntax_error"
@@ -20,7 +19,9 @@ RSpec.describe SymDifferCli::DerivativeExpressionExceptionViewRenderer do
         allow(terminal_text_colorizer).to receive(:make_red) { |text| "(red #{text})" }
       end
 
-      let(:exception) { SymDiffer::InvalidVariableGivenToExpressionParserError.new("|.") }
+      let(:exception) do
+        SymDiffer::ExpressionTextLanguageCompiler::InvalidVariableGivenToExpressionParserError.new("|.")
+      end
 
       it "returns the expected message" do
         expect(render).to eq(
@@ -30,10 +31,7 @@ RSpec.describe SymDifferCli::DerivativeExpressionExceptionViewRenderer do
     end
 
     context "when the exception is EmptyExpressionTextError" do
-      before { allow(exception).to receive(:cause).and_return(nested_exception) }
-
-      let(:exception) { SymDiffer::UnparseableExpressionTextError.new }
-      let(:nested_exception) { SymDiffer::ExpressionTextLanguageCompiler::EmptyExpressionTextError.new }
+      let(:exception) { SymDiffer::ExpressionTextLanguageCompiler::EmptyExpressionTextError.new }
 
       it "returns the expected message" do
         expect(render).to eq("The provided expression was empty, must be non-empty.")
@@ -41,10 +39,7 @@ RSpec.describe SymDifferCli::DerivativeExpressionExceptionViewRenderer do
     end
 
     context "when the exception is InvalidSyntaxError" do
-      before { allow(exception).to receive(:cause).and_return(nested_exception) }
-
-      let(:exception) { SymDiffer::UnparseableExpressionTextError.new }
-      let(:nested_exception) { SymDiffer::ExpressionTextLanguageCompiler::InvalidSyntaxError.new("") }
+      let(:exception) { SymDiffer::ExpressionTextLanguageCompiler::InvalidSyntaxError.new("") }
 
       it "returns the expected message" do
         expect(render).to eq("The provided expression's syntax is invalid.")
@@ -52,10 +47,7 @@ RSpec.describe SymDifferCli::DerivativeExpressionExceptionViewRenderer do
     end
 
     context "when the exception is UnrecognizedToken" do
-      before { allow(exception).to receive(:cause).and_return(nested_exception) }
-
-      let(:exception) { SymDiffer::UnparseableExpressionTextError.new }
-      let(:nested_exception) { SymDiffer::ExpressionTextLanguageCompiler::UnrecognizedTokenError.new("") }
+      let(:exception) { SymDiffer::ExpressionTextLanguageCompiler::UnrecognizedTokenError.new("") }
 
       it "returns the expected message" do
         expect(render).to eq("The provided expression contains unrecognizable characters.")
