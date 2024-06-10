@@ -10,4 +10,4 @@ As of this commit:
 ## See also
 - [sym_differ_rails](https://github.com/enrique-guillen/sym_differ_rails) & [sym_differ_vue](https://github.com/enrique-guillen/sym_differ_vue) for 
   the Web alternative.
-- [sym_differ](https://github.com/enrique-guillen/sym_differ) for the application code that carries out all the relevant mathemtical operations.
+- [sym_differ](https://github.com/enrique-guillen/sym_differ) for the application code that carries out all the relevant mathematical operations.
