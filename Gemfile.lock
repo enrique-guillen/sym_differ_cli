@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/enrique-guillen/sym_differ
-  revision: d8b054712aa5ec6c81fafadc45c4e2dfee329e1f
+  revision: d42586be4b7601f72725e7868d5d4728fc4853f1
   branch: main
   specs:
     sym_differ (1.0.0)
